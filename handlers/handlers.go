@@ -18,7 +18,7 @@ func GetRoot(c echo.Context) error {
 func TextChangeHandler(c echo.Context) error {
 	// Default values
 	color := ""
-	fontSize := 0
+	fontSize := float64(0)
 
 	// Check for query parameters and override defaults if present
 	if c.QueryParam("color") != "" {
