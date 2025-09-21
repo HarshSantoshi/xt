@@ -7,19 +7,27 @@ import (
 	"os"
 	"os/signal"
 	"practice/configs"
-	"practice/routes"
+	"practice/handlers" // Import the handlers package
 	"syscall"
 	"time"
 
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
 	// Initialize the Echo server
 	e := echo.New()
 
-	// Register all the API routes
-	routes.InitRoutes(e)
+	// Add middleware directly
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
+
+	// Define all GET and POST routes directly in main.go
+	e.GET("/", handlers.GetRoot)
+	e.GET("/text/change", handlers.TextChangeHandler)
+	e.GET("/greet", handlers.GreetHandler)
+	e.POST("/jsonPost", handlers.JsonPostHandler)
 
 	// Start the server in a goroutine
 	go func() {
