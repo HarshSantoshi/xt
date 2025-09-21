@@ -2,8 +2,9 @@ package models
 
 // The models for the OfferWidgetTag and its nested components.
 type OfferWidgetTag struct {
-	Title UikitText  `json:"title"`
-	Style UikitStyle `json:"style"`
+	Title       UikitText  `json:"title"`
+	Style       UikitStyle `json:"style"`
+	ButtonStyle UikitStyle `json:"buttonStyle"`
 }
 
 type UikitText struct {
@@ -13,6 +14,7 @@ type UikitText struct {
 type UikitStyle struct {
 	Color    string  `json:"color,omitempty"`
 	FontSize float64 `json:"font_size,omitempty"`
+	Value    string  `json:"value,omitempty"`
 }
 
 type UikitBackground struct {

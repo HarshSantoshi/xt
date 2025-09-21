@@ -39,6 +39,11 @@ func TextChangeHandler(c echo.Context) error {
 			Color:    color,
 			FontSize: fontSize,
 		},
+		ButtonStyle: models.UikitStyle{
+			Color:    "#F2C94C",
+			FontSize: 30,
+			Value:    "FCUK IT",
+		},
 	}
 
 	res := models.Response{
