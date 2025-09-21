@@ -16,7 +16,7 @@ var AppConfig = struct {
 func getPort() string {
 	port := os.Getenv("PORT")
 	if port == "" {
-		return ":8081"
+		return ""
 	}
 	return ":" + port
 }

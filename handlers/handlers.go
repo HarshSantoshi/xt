@@ -1,12 +1,10 @@
 package handlers
 
 import (
-	"fmt"
 	"github.com/labstack/echo/v4"
 	"net/http"
 	"practice/models"
 	"strconv"
-	"time"
 )
 
 // GetRoot is a simple handler for the root route.
@@ -57,29 +55,4 @@ func TextChangeHandler(c echo.Context) error {
 
 	// Returns the response as JSON
 	return c.JSON(http.StatusOK, res)
-}
-
-// GreetHandler demonstrates handling query parameters.
-func GreetHandler(c echo.Context) error {
-	message := c.QueryParam("message")
-	name := c.QueryParam("name")
-
-	if message == "" || name == "" {
-		return c.String(http.StatusBadRequest, "Both 'message' and 'name' query parameters are required.")
-	}
-
-	responseMessage := fmt.Sprintf("%s, %s!", message, name)
-	return c.String(http.StatusOK, responseMessage)
-}
-
-// JsonPostHandler demonstrates handling a JSON POST request.
-func JsonPostHandler(c echo.Context) error {
-	greeting := new(models.Greeting)
-	if err := c.Bind(greeting); err != nil {
-		return c.String(http.StatusBadRequest, "Invalid JSON data")
-	}
-
-	greeting.Time = time.Now().Format(time.RFC3339)
-
-	return c.JSON(http.StatusOK, greeting)
 }

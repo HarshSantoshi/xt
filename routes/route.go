@@ -15,7 +15,7 @@ func InitRoutes(e *echo.Echo) {
 	// Define all GET and POST routes
 	e.GET("/", handlers.GetRoot)
 	e.GET("/text/change", handlers.TextChangeHandler)
-	e.GET("/greet", handlers.GreetHandler)
-	e.POST("/jsonPost", handlers.JsonPostHandler)
+	//e.GET("/greet", handlers.GreetHandler)
+	//e.POST("/jsonPost", handlers.JsonPostHandler)
 
 }
