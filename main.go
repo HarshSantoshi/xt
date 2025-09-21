@@ -1,3 +1,4 @@
+// main.go
 package main
 
 import (
@@ -7,7 +8,7 @@ import (
 	"os"
 	"os/signal"
 	"practice/configs"
-	"practice/handlers" // Import the handlers package
+	"practice/routes"
 	"syscall"
 	"time"
 
@@ -15,21 +16,27 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
-func main() {
-	// Initialize the Echo server
-	e := echo.New()
+// A global Echo instance to be reused across requests.
+var e *echo.Echo
 
-	// Add middleware directly
+func init() {
+	// Initialize the Echo server and routes once, when the application starts.
+	e = echo.New()
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	// Define all GET and POST routes directly in main.go
-	e.GET("/", handlers.GetRoot)
-	e.GET("/text/change", handlers.TextChangeHandler)
-	e.GET("/greet", handlers.GreetHandler)
-	e.POST("/jsonPost", handlers.JsonPostHandler)
+	// Register all the API routes
+	routes.InitRoutes(e)
+}
 
-	// Start the server in a goroutine
+// Handler is the Vercel-compatible entry point for your serverless function.
+// It simply serves the incoming request using the global Echo instance.
+func Handler(w http.ResponseWriter, r *http.Request) {
+	e.ServeHTTP(w, r)
+}
+
+func main() {
+	// Start the server in a goroutine for local development
 	go func() {
 		if err := e.Start(configs.AppConfig.ServerPort); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("Shutting down the server: %v", err)
