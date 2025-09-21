@@ -17,8 +17,8 @@ func GetRoot(c echo.Context) error {
 // TextChangeHandler handles the /text/change endpoint, demonstrating the use of the new models.
 func TextChangeHandler(c echo.Context) error {
 	// Default values
-	color := "#71BA66"
-	fontSize := 20.0
+	color := ""
+	fontSize := 0
 
 	// Check for query parameters and override defaults if present
 	if c.QueryParam("color") != "" {

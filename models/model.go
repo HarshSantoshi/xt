@@ -11,8 +11,8 @@ type UikitText struct {
 }
 
 type UikitStyle struct {
-	Color    string  `json:"color"`
-	FontSize float64 `json:"font_size"`
+	Color    string  `json:"color,omitempty"`
+	FontSize float64 `json:"font_size,omitempty"`
 }
 
 type UikitBackground struct {
