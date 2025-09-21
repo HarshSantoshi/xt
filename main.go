@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/signal"
 	"practice/configs"
+	"practice/routes"
 	"syscall"
 	"time"
 
@@ -18,7 +19,7 @@ func main() {
 	e := echo.New()
 
 	// Register all the API routes
-	InitRoutes(e)
+	routes.InitRoutes(e)
 
 	// Start the server in a goroutine
 	go func() {
